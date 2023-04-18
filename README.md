@@ -1,2 +1,11 @@
 # simsopt_masterclass
 A repo for the simsopt part of the stellarator masterclass at TU/e
+
+Install simsopt via the installation instructions on the website: https://simsopt.readthedocs.io/en/latest/installation.html .
+To keep your device tidy, I would recommend using a virtual environment manager such as anaconda. 
+
+Please also install the "optional" packages: mpi4py, booz_xform, and VMEC.
+mpi4py can readily be installed from your package manager (e.g. ```conda install mpi4py```).
+booz_xform can simply be installed with ```pip install booz_xform``` within your virtual environment (in some cases netCDF errors may occur - please do ```conda install netcdf-fortran``` in such cases)
+
+VMEC can be more challenging to get up and running. I recommend following the GitHub page: https://github.com/hiddenSymmetries/VMEC2000 .If you have all installed, you are ready to play around with ```simsopt```!
