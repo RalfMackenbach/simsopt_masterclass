@@ -2,7 +2,7 @@
 A repo for the simsopt part of the stellarator masterclass at TU/e
 
 Install simsopt via the installation instructions on the website: https://simsopt.readthedocs.io/en/latest/installation.html .
-To keep your device tidy, I would recommend using a virtual environment manager such as anaconda. 
+To keep your device tidy, I would recommend using a virtual environment manager such as anaconda. If you have an M1 chip, please follow: https://github.com/hiddenSymmetries/simsopt/wiki/Mac-M1-installation
 
 Please also install the "optional" packages: mpi4py, booz_xform, and VMEC.
 mpi4py can readily be installed from your package manager (e.g. ```conda install mpi4py```).
