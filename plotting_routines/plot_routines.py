@@ -136,3 +136,67 @@ def plot_surface_and_fl(vmec,fl,s_val,transparant=False,trans_val=0.9,title=''):
     mlab.show()
     mlab.close(all=True)
 
+
+
+def plot_boozer(wout_name,s_val):
+    import matplotlib.pyplot as plt
+    import booz_xform as bx
+    print(s_val)
+    b1 = bx.Booz_xform()
+    b1.read_wout(wout_name)
+    b1.compute_surfs = [s_val]
+    b1.mboz = 40
+    b1.nboz = 40
+    b1.run()
+    #fig = plt.figure()
+    bx.surfplot(b1, js=0,  fill=False, ncontours=40, ntheta=200,nphi=200)
+    plt.show()
+
+
+def plot_geom(fl):
+    import  matplotlib       as      mpl
+    import matplotlib.pyplot as plt
+    font = {'family': 'sans-serif',
+        'weight': 'normal',
+        'size': 10}
+
+    mpl.rc('font', **font)
+
+    theta = (fl.theta_pest).flatten()/np.pi
+
+    fig, ax = plt.subplots(2, 4, figsize=(10, 5),tight_layout=True)
+    # plot magnetic field strength
+    ax[0,0].plot(theta,(fl.modB).flatten())
+    ax[0,0].set_xlabel(r'$\theta/\pi$')
+    ax[0,0].set_ylabel(r'$|B|$')
+    # plot nabla psi . nabla psi
+    ax[0,1].plot(theta,(fl.grad_psi_dot_grad_psi).flatten())
+    ax[0,1].set_xlabel(r'$\theta/\pi$')
+    ax[0,1].set_ylabel(r'$\nabla \psi \cdot \nabla \psi$')
+    # plot nabla alpha . nabla alpha
+    ax[0,2].plot(theta,(fl.grad_alpha_dot_grad_alpha).flatten())
+    ax[0,2].set_xlabel(r'$\theta/\pi$')
+    ax[0,2].set_ylabel(r'$\nabla \alpha \cdot \nabla \alpha$')
+    # plot d l / d theta
+    dtdl = (fl.B_sup_theta_pest/fl.modB).flatten()
+    ax[0,3].plot(theta,np.abs(1/dtdl))
+    ax[0,3].set_xlabel(r'$\theta/\pi$')
+    ax[0,3].set_ylabel(r'$\mathrm{d \ell} / \mathrm{d} \theta$')
+    # plot radial projection of gradient drift 
+    ax[1,0].plot(theta,(fl.B_cross_grad_B_dot_grad_psi).flatten())
+    ax[1,0].set_xlabel(r'$\theta/\pi$')
+    ax[1,0].set_ylabel(r'$\mathbf{B} \times \nabla B \cdot \nabla \psi $')
+    # plot radial projection of curvature drift 
+    ax[1,1].plot(theta,(fl.B_cross_kappa_dot_grad_psi).flatten())
+    ax[1,1].set_xlabel(r'$\theta/\pi$')
+    ax[1,1].set_ylabel(r'$\mathbf{B} \times \mathrm{\kappa} \cdot \nabla \psi $')
+    # plot binormal projection of gradient drift 
+    ax[1,2].plot(theta,(fl.B_cross_grad_B_dot_grad_alpha).flatten())
+    ax[1,2].set_xlabel(r'$\theta/\pi$')
+    ax[1,2].set_ylabel(r'$\mathbf{B} \times \nabla B \cdot \nabla \alpha $')
+    # plot radial projection of curvature drift 
+    ax[1,3].plot(theta,(fl.B_cross_kappa_dot_grad_alpha).flatten())
+    ax[1,3].set_xlabel(r'$\theta/\pi$')
+    ax[1,3].set_ylabel(r'$\mathbf{B} \times \mathrm{\kappa} \cdot \nabla \alpha $')
+
+    plt.show()
