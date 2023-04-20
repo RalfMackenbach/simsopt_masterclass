@@ -14,7 +14,7 @@ alpha_val   = 0.0
 
 
 # read in your wout file here.
-filename    = "wout_precise_QA.nc"
+filename    = "wout_tok.nc"
 vmec     = Vmec(filename=filename,mpi=mpi,verbose=True)
 
 # let us also generate some magnetic field lines
@@ -24,7 +24,8 @@ theta_grid  = np.linspace(-n_pol*np.pi,n_pol*np.pi,1000)
 fl       = vmec_fieldlines(vmec, s_val, alpha_val, theta1d=theta_grid)
 
 # plot the flux-surface and field line on it
-plot_surface_and_fl(vmec,fl,s_val,transparant=False,trans_val=0.9,title='')
+# there seems to be an issue on WSL, so I've turned this plotting routine off for now
+# plot_surface_and_fl(vmec,fl,s_val,transparant=False,trans_val=0.9,title='')
 
 # plot surface alone
 plot_3D(vmec)

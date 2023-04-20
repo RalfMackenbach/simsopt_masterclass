@@ -222,7 +222,7 @@ def plot_3D(vmec):
     ntheta = 100
     nzeta = int(200)
     theta1D = np.linspace(0,2*np.pi,num=ntheta)
-    zeta1D = np.linspace(0,2*np.pi*3/4,num=nzeta)
+    zeta1D  = np.linspace(0,2*np.pi,num=nzeta)
     zeta2D, theta2D = np.meshgrid(zeta1D,theta1D)
     iradius = ns-1
     R = np.zeros((ntheta,nzeta))

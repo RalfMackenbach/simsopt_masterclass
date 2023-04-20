@@ -2,7 +2,6 @@ import numpy as np
 from simsopt.util.mpi                   import MpiPartition
 from simsopt.mhd                        import Vmec, vmec_fieldlines
 from mpi4py                             import MPI
-import matplotlib.pyplot as plt
 
 mpi = MpiPartition()
 mpi.write()
