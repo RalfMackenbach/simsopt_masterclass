@@ -36,13 +36,16 @@ make_tuples = []
 # Define and append targets to make_tuples. The two values after the target are the wanted value, and the weight of the target.
 
 # aspect_target
-make_tuples.append((make_optimizable(aspect_target, vmec,8.0,True).J, 0.0, 1.0))
+make_tuples.append((make_optimizable(aspect_target, vmec,8.0,False).J, 0.0, 1.0))
 
 # iota target
-make_tuples.append((make_optimizable(iota0_target, vmec, 0.5).J, 0.0, 1.0))
+make_tuples.append((make_optimizable(iota0_target, vmec, 1.0).J, 0.0, 1.0))
 
-# quasi-symmetry target
-make_tuples.append((make_optimizable(qs, vmec,0.0).J, 0.0, 1.0))
+# # qs target
+# make_tuples.append((make_optimizable(qs, vmec, 0.0).J, 0.0, 1.0))
+
+# mirror target
+make_tuples.append((make_optimizable(mirror_ratio_target, vmec, 0.21).J, 0.0, 1.0))
 
 # my target
 make_tuples.append((make_optimizable(my_fl_target, vmec, 0.5).J, 0.0, 1.0))
@@ -56,10 +59,11 @@ prob = LeastSquaresProblem.from_tuples(make_tuples)
 # where the resolution of the problem changes
 # as we are iterating. We solve the problem
 # for increasingly higher resolution (mpol, ntor).
-for step in range(3):
+range_val = 2
+for step in range(range_val):
     max_mode = step + 1
 
-    # VMEC's mpol & ntor will be 2, 3, 4, 5:
+    # VMEC's mpol & ntor will be 3, 3... 2+range_val:
     vmec.indata.mpol = 2 + step
     vmec.indata.ntor = vmec.indata.mpol
 

@@ -14,6 +14,7 @@ mpi.write()
 
 
 # give input file name
-filename    = "input.precise_QA"
+filename    = "input.tok"
 # run vmec. verbose command shows progress of the VMEC run.
 vmec        = Vmec(filename=filename,mpi=mpi,verbose=True)
+vmec.run()
