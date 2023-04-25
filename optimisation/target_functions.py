@@ -94,6 +94,34 @@ def mirror_ratio_target(vmec,t=0.21):
     return pen
 
 
+# magnetic well penalty
+def well_target(vmec,t=0.0):
+    """
+    Magnetic well penalty. Want >0. Typically couple percent
+    vmec        -   the vmec object
+    t           -   target value
+    """
+    vmec.run()
+    well = vmec.vacuum_well()
+    print("Well = ",well)
+    pen = well-t
+    return pen
+
+
+# Dmerc target
+def dmerc_target(vmec,t=0.0):
+    """
+    Dmerc penalty at the edge.  Want >0.
+    vmec        -   the vmec object
+    t           -   target value
+    """
+    vmec.run()
+    dmerc = vmec.wout.DMerc[-2]
+    print("Dmerc = ",dmerc)
+    pen = dmerc-t
+    return pen
+
+
 # my target function
 def my_fl_target(vmec,t,s_val=0.5,alpha_val=0.0,n_pol=1.0,theta_res=1000):
     theta_grid  = np.linspace(-n_pol*np.pi,n_pol*np.pi,theta_res)
